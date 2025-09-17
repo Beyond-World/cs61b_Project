@@ -21,8 +21,14 @@ public class GameLogic {
     public static int moveTileUpAsFarAsPossible(int[][] board, int r, int c, int minR) {
         // TODO: Fill this in in tasks 2, 3, 4
         if (r == 0 || board[r - 1][c] != 0) {
-            return r;
+            if (board[r - 1][c] == board[r][c]){
+                board[r - 1][c] = board[r - 1][c] * 2;
+                board[r][c] = 0;
+                return r;
+            }
+            return 0;
         }
+        
         int num = board[r][c];
         board[r - 1][c] = num;
         board[r][c] = 0;
