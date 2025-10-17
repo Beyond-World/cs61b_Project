@@ -1,5 +1,6 @@
 import edu.princeton.cs.algs4.In;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class LinkedListDeque61B<T> implements Deque61B<T> {
@@ -37,7 +38,15 @@ public class LinkedListDeque61B<T> implements Deque61B<T> {
 
     @Override
     public List<T> toList() {
-        return List.of();
+        List<T> returnList = new ArrayList<>();
+        Node point = sentinel.next;
+
+        while (point != sentinel) {
+            returnList.add(point.item);
+            point = point.next;
+        }
+
+        return returnList;
     }
 
     @Override
