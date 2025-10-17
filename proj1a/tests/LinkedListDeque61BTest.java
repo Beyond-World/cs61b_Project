@@ -1,3 +1,4 @@
+import edu.princeton.cs.algs4.In;
 import jh61b.utils.Reflection;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -57,4 +58,77 @@ public class LinkedListDeque61BTest {
      }
 
     // Below, you'll write your own tests for LinkedListDeque61B.
+    @Test
+    /** This test verify isEmpty. */
+    public void testIsEmpty() {
+        Deque61B<String> lld1 = new LinkedListDeque61B<>();
+
+        assertThat(lld1.isEmpty()).isTrue();
+
+        lld1.addFirst("dog");
+
+        assertThat(lld1.isEmpty()).isFalse();
+    }
+
+    @Test
+    /** This test verify size equal 0. */
+    public void testZeroSize() {
+        Deque61B<String> lld1 = new LinkedListDeque61B<>();
+
+        assertThat(lld1.size()).isEqualTo(0);
+    }
+
+    @Test
+    /** This test verify size equal 0. */
+    public void testOneSize() {
+        Deque61B<Integer> lld1 = new LinkedListDeque61B<>();
+
+        lld1.addFirst(1);
+        assertThat(lld1.size()).isEqualTo(1);
+    }
+
+    @Test
+    /** This test performs interspersed isEmpty and size. */
+    public void testIsEmptyAndSize() {
+        Deque61B<Integer> lld1 = new LinkedListDeque61B<>();
+
+        lld1.addLast(3);
+        lld1.addLast(4);
+        lld1.addFirst(2);
+
+        assertThat(lld1.size()).isEqualTo(3);
+        assertThat(lld1.isEmpty()).isFalse();
+    }
+
+    @Test
+    /** This test get. */
+    public void testGet() {
+        Deque61B<Integer> lld1 = new LinkedListDeque61B<>();
+
+        assertThat(lld1.get(1)).isNull();
+
+        lld1.addFirst(1);
+        lld1.addLast(2);
+        lld1.addLast(3);
+        lld1.addLast(4);
+
+        assertThat(lld1.get(4)).isEqualTo(4);
+        assertThat(lld1.get(7)).isNull();
+    }
+
+    @Test
+    /** This test get. */
+    public void testGetRecursive() {
+        Deque61B<Integer> lld1 = new LinkedListDeque61B<>();
+
+        assertThat(lld1.getRecursive(1)).isNull();
+
+        lld1.addFirst(1);
+        lld1.addLast(2);
+        lld1.addLast(3);
+        lld1.addLast(4);
+
+        assertThat(lld1.getRecursive(4)).isEqualTo(4);
+        assertThat(lld1.get(7)).isNull();
+    }
 }

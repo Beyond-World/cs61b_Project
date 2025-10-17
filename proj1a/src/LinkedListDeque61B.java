@@ -6,7 +6,7 @@ import java.util.List;
 public class LinkedListDeque61B<T> implements Deque61B<T> {
     private Node sentinel;
 
-    private class Node {
+    public class Node {
         public  T item;
         public Node prev;
         public Node next;
@@ -39,11 +39,11 @@ public class LinkedListDeque61B<T> implements Deque61B<T> {
     @Override
     public List<T> toList() {
         List<T> returnList = new ArrayList<>();
-        Node point = sentinel.next;
+        Node pointer = sentinel.next;
 
-        while (point != sentinel) {
-            returnList.add(point.item);
-            point = point.next;
+        while (pointer != sentinel) {
+            returnList.add(pointer.item);
+            pointer = pointer.next;
         }
 
         return returnList;
@@ -51,12 +51,23 @@ public class LinkedListDeque61B<T> implements Deque61B<T> {
 
     @Override
     public boolean isEmpty() {
+        if (sentinel.next == sentinel) {
+            return true;
+        }
         return false;
     }
 
     @Override
     public int size() {
-        return 0;
+        Node pointer = sentinel.next;
+        int size = 0;
+
+        while (pointer != sentinel) {
+            size++;
+            pointer = pointer.next;
+        }
+
+        return size;
     }
 
     @Override
@@ -71,11 +82,29 @@ public class LinkedListDeque61B<T> implements Deque61B<T> {
 
     @Override
     public T get(int index) {
-        return null;
+        Node pointer = sentinel;
+
+        if (pointer.next == sentinel || index > size()) {
+            return null;
+        }
+
+        for (int i = 0; i < index; i++) {
+            pointer = pointer.next;
+        }
+            return pointer.item;
     }
 
     @Override
     public T getRecursive(int index) {
-        return null;
+        return getRecursive(index, sentinel);
     }
+
+    public T getRecursive(int index, Node pointer) {
+        if (index == 0 || pointer.next == sentinel || index > size()) {
+            return pointer.item;
+        } else {
+            return getRecursive(index - 1, pointer.next);
+        }
+    }
+
 }
